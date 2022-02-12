@@ -27,13 +27,13 @@ $(function () {
     }, Garden.options.growSpeed);
 });
 
-$(window).resize(function() {
-    var newWidth = $(window).width();
-    var newHeight = $(window).height();
-    if (newWidth != clientWidth && newHeight != clientHeight) {
-        location.replace(location);
-    }
-});
+//$(window).resize(function() {
+//    var newWidth = $(window).width();
+//    var newHeight = $(window).height();
+//    if (newWidth != clientWidth && newHeight != clientHeight) {
+//        location.replace(location);
+//    }
+//});
 
 function getHeartPoint(angle) {
 	var t = angle / Math.PI;
