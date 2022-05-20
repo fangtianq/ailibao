@@ -147,8 +147,8 @@ function init(){
 					 // 当前点的坐标和前一点的坐标差值
 					desX = nX - sX;
 					desY = nY - sY;
-					tX += desX*0.1;
-					tY += desY*0.1;
+					tX += desX*0.052;
+					tY += desY*0.052;
 
 					obox.style.transform = "rotateX("+(-tY)+"deg) rotateY("+tX+"deg)";
 					sX = nX;
@@ -168,7 +168,7 @@ function init(){
 					}
 				},13);
 			}
-			document.getElementById('box').addEventListener('touchend', touchEndFunc1, false);
+			document.getElementById('box').addEventListener('touchup', touchEndFunc1, false);
 		return false;
 	}
 	//滚轮放大缩小
