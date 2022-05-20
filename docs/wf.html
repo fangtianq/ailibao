@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>我们</title>
+	<!--<script type="text/javascript" src="wf/js/touch.js"></script>-->
 	<style>
 		*{margin: 0;padding: 0;}
 		html,body{height: 100%;}
@@ -78,6 +79,7 @@
 	<p></p>
 </div>
 <script>
+
 setTimeout(init,100);
 function init(){
 	var obox = document.getElementById('box'),
@@ -131,6 +133,44 @@ function init(){
 			}
 		return false;
 	}
+	function touchSatrtFunc1(e){
+		clearInterval(obox.timer);
+		e = e || window.event;
+		var touch = e.touches[0];
+		var sX = Number(touch.pageX),
+			sY = Number(touch.pageY);
+			function touchMoveFunc1(e){
+				e = e || window.event;
+				touch = e.touches[0];
+				var nX = Number(touch.pageX),
+					nY = Number(touch.pageY);
+					 // 当前点的坐标和前一点的坐标差值
+					desX = nX - sX;
+					desY = nY - sY;
+					tX += desX*0.1;
+					tY += desY*0.1;
+
+					obox.style.transform = "rotateX("+(-tY)+"deg) rotateY("+tX+"deg)";
+					sX = nX;
+					sY = nY;
+			}
+			document.getElementById('box').addEventListener('touchmove', touchMoveFunc1, false);
+			function touchEndFunc1(e){
+				touchMoveFunc1 = touchEndFunc1 = null;
+				obox.timer = setInterval(function(){
+					desX *= 0.95;
+					desY *= 0.95;
+					tX += desX*0.1;
+					tY += desY*0.1;
+					obox.style.transform = "rotateX("+(-tY)+"deg) rotateY("+tX+"deg)";
+					if (Math.abs(desX)<0.5 && Math.abs(desY)<0.5) {
+						clearInterval(obox.timer);
+					}
+				},13);
+			}
+			document.getElementById('box').addEventListener('touchend', touchEndFunc1, false);
+		return false;
+	}
 	//滚轮放大缩小
 	mousewheel(document,function(e){
 		e = e || window.event;
@@ -149,6 +189,12 @@ function init(){
 	function addEvent(obj,eName,fn){
 		obj.attachEvent?obj.attachEvent("on"+eName,fn):obj.addEventListener(eName,fn);
 	}
+	function bindEvent(obj){
+		if(obj){
+			obj.addEventListener('touchstart', touchSatrtFunc1, false);
+		}
+	}
+	bindEvent(document.getElementById('box'));
 }
 </script>
 </body>
