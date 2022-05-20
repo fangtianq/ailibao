@@ -134,12 +134,14 @@ function init(){
 		return false;
 	}
 	function touchSatrtFunc1(e){
+		e.preventDefault();
 		clearInterval(obox.timer);
 		e = e || window.event;
 		var touch = e.touches[0];
 		var sX = Number(touch.pageX),
 			sY = Number(touch.pageY);
 			function touchMoveFunc1(e){
+				e.preventDefault();
 				e = e || window.event;
 				touch = e.touches[0];
 				var nX = Number(touch.pageX),
@@ -156,6 +158,7 @@ function init(){
 			}
 			document.getElementById('box').addEventListener('touchmove', touchMoveFunc1, false);
 			function touchEndFunc1(e){
+				e.preventDefault();
 				touchMoveFunc1 = touchEndFunc1 = null;
 				obox.timer = setInterval(function(){
 					desX *= 0.95;
